@@ -1,35 +1,33 @@
-﻿using Movie_Showtime_App.Core.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Movie_Showtime_App.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    class UserService : IUserRepository
+    class UserService : IUserService
     {
-        public User Add(User newUser)
+        private readonly IHttpContextAccessor _context;
+        public UserService(IHttpContextAccessor httpContext)
         {
-            throw new NotImplementedException();
+            _context = httpContext;
+        }
+        public ClaimsPrincipal User
+        {
+            get
+            {
+                return _context.HttpContext.User;
+            }
         }
 
-        public User Get(int id)
+        public string CurrentUserId
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User Update(User updatedUser)
-        {
-            throw new NotImplementedException();
+            get
+            {
+                return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            }
         }
     }
 }
