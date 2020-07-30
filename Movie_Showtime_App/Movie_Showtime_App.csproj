@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Movie_Showtime_App.Core\Movie_Showtime_App.Core.csproj" />
+    <ProjectReference Include="..\Movie_Showtime_App.Infrastructure\Movie_Showtime_App.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

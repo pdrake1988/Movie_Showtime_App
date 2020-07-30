@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Models
 {
-    class User
+    public class User
     {
         public int Id { get; set; }
         public string Name { get; set; }
