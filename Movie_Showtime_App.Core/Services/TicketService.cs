@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    class TicketService : ITicketService
+    public class TicketService : ITicketService
     {
         private readonly ITicketRepository _ticketRepo;
         public TicketService(ITicketRepository ticketRepo)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    interface IMovieService
+    public interface IMovieService
     {
         Movie Add(Movie newMovie);
         Movie Update(Movie updatedMovie);

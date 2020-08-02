@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    class MovieService : IMovieService
+    public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieService;
         public MovieService(IMovieRepository movieService)

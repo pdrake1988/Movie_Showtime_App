@@ -5,11 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Movie_Showtime_App.Core.Models;
+using Movie_Showtime_App.Core.Services;
+using Movie_Showtime_App.Infrastructure.Data;
 
 namespace Movie_Showtime_App
 {
@@ -26,10 +31,20 @@ namespace Movie_Showtime_App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddHttpContextAccessor();
+            services.AddDbContext<AppDbContext>();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<DbIntializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbIntializer dbIntializer)
         {
             if (env.IsDevelopment())
             {
@@ -43,6 +58,7 @@ namespace Movie_Showtime_App
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            dbIntializer.Initialize();
         }
     }
 }

@@ -8,10 +8,10 @@ using System.Linq;
 
 namespace Movie_Showtime_App.Infrastructure.Data
 {
-    class TicketRepository : ITicketRepository
+    public class TicketRepository : ITicketRepository
     {
-        private readonly DbContext _dbContext;
-        public TicketRepository(DbContext dbContext)
+        private readonly AppDbContext _dbContext;
+        public TicketRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -25,7 +25,7 @@ namespace Movie_Showtime_App.Infrastructure.Data
         public Tickets Get(int id)
         {
             return _dbContext.Tickets
-                    .FirstOrDefault(t => t.TicketId == id);
+                    .FirstOrDefault(t => t.Id == id);
         }
 
         public IEnumerable<Tickets> GetAll()
@@ -46,7 +46,7 @@ namespace Movie_Showtime_App.Infrastructure.Data
 
         public Tickets Update(Tickets updatedTicket)
         {
-            var selectedTicket = _dbContext.Tickets.Find(updatedTicket.TicketId);
+            var selectedTicket = _dbContext.Tickets.Find(updatedTicket.Id);
             if (selectedTicket == null) return null;
             _dbContext.Entry(selectedTicket)
                 .CurrentValues

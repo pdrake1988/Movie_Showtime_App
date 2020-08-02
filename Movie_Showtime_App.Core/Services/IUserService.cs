@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    interface IUserService
+    public interface IUserService
     {
         ClaimsPrincipal User { get; }
         string CurrentUserId { get; }

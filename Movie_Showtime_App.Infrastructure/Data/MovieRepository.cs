@@ -8,10 +8,10 @@ using System.Linq;
 
 namespace Movie_Showtime_App.Infrastructure.Data
 {
-    class MovieRepository : IMovieRepository
+    public class MovieRepository : IMovieRepository
     {
-        private readonly DbContext _dbContext;
-        public MovieRepository(DbContext dbContext)
+        private readonly AppDbContext _dbContext;
+        public MovieRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -25,7 +25,7 @@ namespace Movie_Showtime_App.Infrastructure.Data
         public Movie Get(int id)
         {
             return _dbContext.Movies
-                    .FirstOrDefault(t => t.MovieId == id);
+                    .FirstOrDefault(t => t.Id == id);
         }
 
         public IEnumerable<Movie> GetAll()
@@ -46,7 +46,7 @@ namespace Movie_Showtime_App.Infrastructure.Data
 
         public Movie Update(Movie updatedMovie)
         {
-            var selectedMovie = _dbContext.Movies.Find(updatedMovie.MovieId);
+            var selectedMovie = _dbContext.Movies.Find(updatedMovie.Id);
             if (selectedMovie == null) return null;
             _dbContext.Entry(selectedMovie)
                 .CurrentValues

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    interface ITicketService
+    public interface ITicketService
     {
         Tickets Add(Tickets newTicket);
         Tickets Update(Tickets updatedTicket);

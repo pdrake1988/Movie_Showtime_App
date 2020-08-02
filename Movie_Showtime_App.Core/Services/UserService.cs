@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Movie_Showtime_App.Core.Services
 {
-    class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IHttpContextAccessor _context;
         public UserService(IHttpContextAccessor httpContext)

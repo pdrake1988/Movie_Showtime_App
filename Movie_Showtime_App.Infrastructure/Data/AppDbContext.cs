@@ -7,7 +7,7 @@ using Movie_Showtime_App.Core.Models;
 
 namespace Movie_Showtime_App.Infrastructure.Data
 {
-    public class DbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext
     {
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Tickets> Tickets { get; set; }
