@@ -190,6 +190,14 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MovieTitle = "Wonder Woman",
+                            Rating = "PG-13"
+                        });
                 });
 
             modelBuilder.Entity("Movie_Showtime_App.Core.Models.Tickets", b =>
@@ -207,8 +215,7 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<string>("UserId1")
-                        .IsRequired();
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
@@ -217,6 +224,17 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
                     b.HasIndex("UserId1");
 
                     b.ToTable("Tickets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MovieId = 1,
+                            SeatNumber = "E6",
+                            ShowTime = "5:30",
+                            TheaterNumber = 3,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("Movie_Showtime_App.Core.Models.User", b =>
@@ -226,6 +244,19 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
                     b.Property<string>("Name");
 
                     b.HasDiscriminator().HasValue("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "914f1dc7-8480-4add-92be-b2c2804fedab",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            Name = "Test User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -280,10 +311,9 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Movie_Showtime_App.Core.Models.User", "User")
+                    b.HasOne("Movie_Showtime_App.Core.Models.User")
                         .WithMany("Tickets")
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

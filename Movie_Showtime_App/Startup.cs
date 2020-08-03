@@ -58,7 +58,7 @@ namespace Movie_Showtime_App
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            dbIntializer.Initialize();
+            //dbIntializer.Initialize();
         }
     }
 }

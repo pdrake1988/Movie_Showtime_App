@@ -23,9 +23,9 @@ namespace Movie_Showtime_App
         }
         public void Initialize()
         {
-            AddAdminUser();
             AddTestUser();
             AddTestTicket();
+            //AddAdminUser();
         }
         public User CreateUser(string Email, string Name)
         {

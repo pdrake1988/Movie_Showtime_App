@@ -11,9 +11,18 @@ namespace Movie_Showtime_App.Infrastructure.Data
     {
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Tickets> Tickets { get; set; }
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = "1", Name = "Test User" }
+            );
+            modelBuilder.Entity<Tickets>().HasData(
+                new Tickets { Id = 1, TheaterNumber = 3, SeatNumber = "E6", ShowTime = "5:30", MovieId = 1, UserId = 1 }
+            );
+            modelBuilder.Entity<Movie>().HasData(
+                new Movie { Id = 1, MovieTitle = "Wonder Woman", Rating = "PG-13" }
+            );
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

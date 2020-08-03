@@ -12,7 +12,6 @@ namespace Movie_Showtime_App.Core.Models
         public string ShowTime { get; set; }
         public Movie Movie { get; set; }
         public int MovieId { get; set; }
-        public User User { get; set; }
         public int UserId { get; set; }
     }
 }

@@ -178,8 +178,8 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
                     SeatNumber = table.Column<string>(nullable: true),
                     ShowTime = table.Column<string>(nullable: true),
                     MovieId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    UserId1 = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -195,8 +195,23 @@ namespace Movie_Showtime_App.Infrastructure.Migrations
                         column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "Name" },
+                values: new object[] { "1", 0, "914f1dc7-8480-4add-92be-b2c2804fedab", "User", null, false, false, null, null, null, null, null, false, null, false, null, "Test User" });
+
+            migrationBuilder.InsertData(
+                table: "Movies",
+                columns: new[] { "Id", "MovieTitle", "Rating" },
+                values: new object[] { 1, "Wonder Woman", "PG-13" });
+
+            migrationBuilder.InsertData(
+                table: "Tickets",
+                columns: new[] { "Id", "MovieId", "SeatNumber", "ShowTime", "TheaterNumber", "UserId", "UserId1" },
+                values: new object[] { 1, 1, "E6", "5:30", 3, 1, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
